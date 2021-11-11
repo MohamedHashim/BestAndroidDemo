@@ -6,6 +6,11 @@ plugins {
     id 'dagger.hilt.android.plugin'
     id 'io.gitlab.arturbosch.detekt'
 }
+
+// load local properties data
+def localProperties = new Properties()
+localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+
 android {
     compileSdkVersion AndroidSdk.compileSdk
     defaultConfig {
@@ -15,6 +20,8 @@ android {
         versionCode App.versionCode
         versionName App.versionName
         testInstrumentationRunner App.testRunner
+        // themoviedb API key
+        buildConfigField "String", "API_KEY", localProperties['API_KEY']
     }
     buildTypes {
         release {

@@ -8,4 +8,6 @@ ext.versions = [
         'junit'           : '4.13.2',
         'runner'          : '1.4.0',
         'espresso'        : '3.4.0',
+        'detekt'          : '1.19.0-RC1',
+        'detekt-cli'      : '1.0.1',
 ]

@@ -8,10 +8,12 @@ buildscript {
     dependencies {
         apply from: 'dependencies-versions.gradle'
 
+        //gradle build classpath
         classpath "com.android.tools.build:gradle:$versions.gradle"
+        //kotlin classpath
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        //detekt classpath
+        classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$versions.detekt"
     }
 }
 

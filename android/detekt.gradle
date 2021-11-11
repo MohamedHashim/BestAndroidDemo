@@ -3,7 +3,7 @@ configurations {
 }
 
 dependencies {
-    detekt "io.gitlab.arturbosch.detekt:detekt-cli:$versions.detekt-cli"
+    detekt "io.gitlab.arturbosch.detekt:detekt-cli:$LibrariesVersion.detekt_cli"
 }
 
 task detekt(type: JavaExec) {

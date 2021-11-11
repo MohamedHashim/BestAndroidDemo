@@ -1,0 +1,43 @@
+ext {
+
+    BuildPlugins = [
+            androidGradlePlugin: "com.android.tools.build:gradle:$gradle_version",
+            kotlinGradlePlugin : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version",
+            hiltGradlePlugin   : "com.google.dagger:hilt-android-gradle-plugin:$LibrariesVersion.hilt_version",
+            detektGradlePlugin : "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$LibrariesVersion.detekt"
+    ]
+
+    Libraries = [
+            kotlinStd        : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
+            hilt             : "com.google.dagger:hilt-android:$LibrariesVersion.hilt_version",
+            hiltCompiler     : "com.google.dagger:hilt-android-compiler:$LibrariesVersion.hilt_version",
+            appCompat        : "androidx.appcompat:appcompat:$LibrariesVersion.appCompat",
+            fragmentKTX      : "androidx.fragment:fragment-ktx:$LibrariesVersion.fragmentKtx",
+            androidCore      : "androidx.core:core-ktx:$LibrariesVersion.androidCore",
+            materialDesign   : "com.google.android.material:material:$LibrariesVersion.materialDesign",
+            constraintLayout : "androidx.constraintlayout:constraintlayout:$LibrariesVersion.constraintLayout",
+            retrofit         : "com.squareup.retrofit2:retrofit:$LibrariesVersion.retrofit",
+            moshiConverter   : "com.squareup.retrofit2:converter-moshi:$LibrariesVersion.moshiConverter",
+            okHTTPLogger     : "com.squareup.okhttp3:logging-interceptor:$LibrariesVersion.okHTTPLogger",
+            room             : "androidx.room:room-runtime:$LibrariesVersion.room",
+            roomCompiler     : "androidx.room:room-compiler:$LibrariesVersion.room",
+            roomKTX          : "androidx.room:room-ktx:$LibrariesVersion.room",
+            coroutinesAndroid: "org.jetbrains.kotlinx:kotlinx-coroutines-android:$LibrariesVersion.coroutines"
+    ]
+
+    TestLibraries = [
+            testCore   : "androidx.test:core:$TestLibrariesVersion.textCore",
+            junit      : "junit:junit:$TestLibrariesVersion.jUnit",
+            androidX   : "androidx.test.ext:junit:$TestLibrariesVersion.androidX",
+            truth      : "com.google.truth:truth:$TestLibrariesVersion.truth",
+            archCore   : "androidx.arch.core:core-testing:$TestLibrariesVersion.androidArch",
+            coroutines : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$LibrariesVersion.coroutines",
+            room       : "androidx.room:room-testing:$LibrariesVersion.room",
+            mockk      : "io.mockk:mockk:$TestLibrariesVersion.mockk",
+            testRunner : "androidx.test:runner:$TestLibrariesVersion.runner",
+            robolectric: "org.robolectric:robolectric:$TestLibrariesVersion.robolectric",
+            hilt       : "com.google.dagger:hilt-android-testing:$TestLibrariesVersion.hilt_version",
+            hiltKapt   : "com.google.dagger:hilt-android-compiler:$TestLibrariesVersion.hilt_version",
+            espresso   : "androidx.test.espresso:espresso-core$TestLibrariesVersion.espresso"
+    ]
+}

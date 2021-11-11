@@ -7,13 +7,16 @@ buildscript {
     }
     dependencies {
         apply from: 'dependencies-versions.gradle'
+        apply from: 'dependencies-groups.gradle'
 
         //gradle build classpath
-        classpath "com.android.tools.build:gradle:$versions.gradle"
+        classpath BuildPlugins.androidGradlePlugin
         //kotlin classpath
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+        classpath BuildPlugins.kotlinGradlePlugin
         //detekt classpath
-        classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$versions.detekt"
+        classpath BuildPlugins.detektGradlePlugin
+        //hilt classpath
+        classpath BuildPlugins.hiltGradlePlugin
     }
 }
 

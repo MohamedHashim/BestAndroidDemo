@@ -38,7 +38,7 @@ ext {
             mockk      : "io.mockk:mockk:$TestLibrariesVersion.mockk",
             testRunner : "androidx.test:runner:$TestLibrariesVersion.runner",
             robolectric: "org.robolectric:robolectric:$TestLibrariesVersion.robolectric",
-            hilt       : "com.google.dagger:hilt-android-testing:$TestLibrariesVersion.hilt_version",
+            hiltTesting: "com.google.dagger:hilt-android-testing:$TestLibrariesVersion.hilt_version",
             hiltKapt   : "com.google.dagger:hilt-android-compiler:$TestLibrariesVersion.hilt_version",
             espresso   : "androidx.test.espresso:espresso-core$TestLibrariesVersion.espresso"
     ]

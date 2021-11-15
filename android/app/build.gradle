@@ -28,6 +28,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            minifyEnabled false
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-debug"
+        }
     }
 }
 
@@ -57,6 +62,10 @@ dependencies {
 
     //coroutines
     implementation Libraries.coroutinesAndroid
+
+    //navigation component
+    implementation Libraries.navigationFragment
+    implementation Libraries.navigationUi
 
     //testing
     testImplementation TestLibraries.testCore

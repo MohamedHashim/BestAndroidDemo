@@ -5,6 +5,7 @@ package com.backbase.assignment.core.data
  */
 
 object EndPoint {
+    const val theMovieDB = "https://api.themoviedb.org/3/movie/"
     const val languageQuery = "en-US"
     const val pageUnDefinedQuery = "undefined"
 }

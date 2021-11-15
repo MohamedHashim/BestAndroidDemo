@@ -8,21 +8,23 @@ ext {
     ]
 
     Libraries = [
-            kotlinStd        : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
-            hilt             : "com.google.dagger:hilt-android:$LibrariesVersion.hilt_version",
-            hiltCompiler     : "com.google.dagger:hilt-android-compiler:$LibrariesVersion.hilt_version",
-            appCompat        : "androidx.appcompat:appcompat:$LibrariesVersion.appCompat",
-            fragmentKTX      : "androidx.fragment:fragment-ktx:$LibrariesVersion.fragmentKtx",
-            androidCore      : "androidx.core:core-ktx:$LibrariesVersion.androidCore",
-            materialDesign   : "com.google.android.material:material:$LibrariesVersion.materialDesign",
-            constraintLayout : "androidx.constraintlayout:constraintlayout:$LibrariesVersion.constraintLayout",
-            retrofit         : "com.squareup.retrofit2:retrofit:$LibrariesVersion.retrofit",
-            moshiConverter   : "com.squareup.retrofit2:converter-moshi:$LibrariesVersion.moshiConverter",
-            okHTTPLogger     : "com.squareup.okhttp3:logging-interceptor:$LibrariesVersion.okHTTPLogger",
-            room             : "androidx.room:room-runtime:$LibrariesVersion.room",
-            roomCompiler     : "androidx.room:room-compiler:$LibrariesVersion.room",
-            roomKTX          : "androidx.room:room-ktx:$LibrariesVersion.room",
-            coroutinesAndroid: "org.jetbrains.kotlinx:kotlinx-coroutines-android:$LibrariesVersion.coroutines"
+            kotlinStd         : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
+            hilt              : "com.google.dagger:hilt-android:$LibrariesVersion.hilt_version",
+            hiltCompiler      : "com.google.dagger:hilt-android-compiler:$LibrariesVersion.hilt_version",
+            appCompat         : "androidx.appcompat:appcompat:$LibrariesVersion.appCompat",
+            fragmentKTX       : "androidx.fragment:fragment-ktx:$LibrariesVersion.fragmentKtx",
+            androidCore       : "androidx.core:core-ktx:$LibrariesVersion.androidCore",
+            materialDesign    : "com.google.android.material:material:$LibrariesVersion.materialDesign",
+            constraintLayout  : "androidx.constraintlayout:constraintlayout:$LibrariesVersion.constraintLayout",
+            retrofit          : "com.squareup.retrofit2:retrofit:$LibrariesVersion.retrofit",
+            moshiConverter    : "com.squareup.retrofit2:converter-moshi:$LibrariesVersion.moshiConverter",
+            okHTTPLogger      : "com.squareup.okhttp3:logging-interceptor:$LibrariesVersion.okHTTPLogger",
+            room              : "androidx.room:room-runtime:$LibrariesVersion.room",
+            roomCompiler      : "androidx.room:room-compiler:$LibrariesVersion.room",
+            roomKTX           : "androidx.room:room-ktx:$LibrariesVersion.room",
+            coroutinesAndroid : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$LibrariesVersion.coroutines",
+            navigationFragment: "androidx.navigation:navigation-fragment-ktx:$LibrariesVersion.navigation",
+            navigationUi      : "androidx.navigation:navigation-ui-ktx:$LibrariesVersion.navigation",
     ]
 
     TestLibraries = [

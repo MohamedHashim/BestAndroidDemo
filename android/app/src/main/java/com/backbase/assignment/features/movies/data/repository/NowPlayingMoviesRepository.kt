@@ -19,7 +19,22 @@ class NowPlayingMoviesRepository @Inject constructor(
     private val apiService: MovieApi
 ) : INowPlayingMoviesRepository {
 
+    /**
+     *  fetch now playing movies data and emit success and failure response
+     */
     override suspend fun nowPlayingMovies(): Flow<Either<Failure, List<Movie>>> =
         flow {
+            val response =
+                apiService.getNowPlayingMovies()
+            emit(
+                when (response.isSuccessful) {
+                    true -> {
+                        response.body()?.let { it ->
+                            Either.Right(it.results.map { a -> a.toDomainObject() })
+                        } ?: Either.Left(Failure.DataError)
+                    }
+                    false -> Either.Left(Failure.ServerError)
+                }
+            )
         }
 }

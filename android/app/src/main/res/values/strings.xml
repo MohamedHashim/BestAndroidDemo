@@ -2,4 +2,6 @@
     <string name="app_name">CS Android Assignment</string>
     <string name="data_error">Data Error : There is no data to show</string>
     <string name="server_error">Server Error : Could not retrieve data from servers</string>
+    <string name="movie_box_logo">Movie box logo</string>
+    <string name="playing_now">Playing now</string>
 </resources>

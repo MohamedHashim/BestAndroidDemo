@@ -30,17 +30,17 @@ class RatingView @JvmOverloads constructor(
     val parentArcPaint = Paint().apply {
         style = Paint.Style.STROKE
         isAntiAlias = true
-        strokeWidth = 10f
+        strokeWidth = 8f
     }
 
     val fillArcPaint = Paint().apply {
         style = Paint.Style.STROKE
         isAntiAlias = true
-        strokeWidth = 10f
+        strokeWidth = 8f
         strokeCap = Paint.Cap.ROUND
     }
 
-    val backArcPaint = Paint().apply {
+    private val backArcPaint = Paint().apply {
         style = Paint.Style.FILL
         strokeCap = Paint.Cap.SQUARE
         color = ContextCompat.getColor(context, R.color.blue_bg_rating)
@@ -59,7 +59,7 @@ class RatingView @JvmOverloads constructor(
     private fun setSpace() {
         val horizontalCenter = (width.div(2)).toFloat()
         val verticalCenter = (height.div(2)).toFloat()
-        val ovalSize = 55
+        val ovalSize = 45
         ovalSpace.set(
             horizontalCenter - ovalSize,
             verticalCenter - ovalSize,
@@ -71,7 +71,7 @@ class RatingView @JvmOverloads constructor(
     private fun setBackgroundSpace() {
         val horizontalCenter = (width.div(2)).toFloat()
         val verticalCenter = (height.div(2)).toFloat()
-        val ovalSize = 65
+        val ovalSize = 55
         ovalBackgroundSpace.set(
             horizontalCenter - ovalSize,
             verticalCenter - ovalSize,

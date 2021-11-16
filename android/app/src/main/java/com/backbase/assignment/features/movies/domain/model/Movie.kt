@@ -7,7 +7,7 @@ package com.backbase.assignment.features.movies.domain.model
 data class Movie(
     val id: Long,
     val title: String,
-    val rating: Float,
+    val rating: Int,
     val releaseDate: String,
     val posterPath: String
 )

@@ -54,7 +54,7 @@ class MoviesViewHolder(
             binding.apply {
                 ViewCompat.setTransitionName(binding.itemMovieContainer, data.title)
                 movie = data
-                val ratingValue = data.rating * 10f
+                val ratingValue = data.rating * 10
                 if (ratingValue >= 50) {
                     rating.fillArcPaint.color = ContextCompat.getColor(context, R.color.light_green)
                     rating.parentArcPaint.color =
@@ -66,7 +66,7 @@ class MoviesViewHolder(
                         ContextCompat.getColor(context, R.color.dark_yellow)
                 }
                 tvRating.text = "$ratingValue%"
-                rating.currentPercentage = ratingValue
+                rating.currentPercentage = ratingValue.toFloat()
                 rating.animateProgress()
 
                 executePendingBindings()

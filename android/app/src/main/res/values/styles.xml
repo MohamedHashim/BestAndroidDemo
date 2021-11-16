@@ -12,10 +12,25 @@
         <item name="android:textSize">@dimen/header_text_size</item>
         <item name="android:fontFamily">@font/helveticaneuelt</item>
     </style>
+
     <style name="ErrorTextAppearance" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/red</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">@dimen/error_text_size</item>
+        <item name="android:fontFamily">@font/helveticaneuelt</item>
+    </style>
+
+    <style name="TitleTextAppearance" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/grey_title</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/title_text_size</item>
+        <item name="android:fontFamily">@font/helveticaneubold</item>
+    </style>
+
+    <style name="DateTextAppearance" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/grey_title</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/header_text_size</item>
         <item name="android:fontFamily">@font/helveticaneuelt</item>
     </style>
 </resources>

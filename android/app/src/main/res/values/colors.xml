@@ -4,10 +4,11 @@
     <color name="grey">#767676</color>
     <color name="darkBackground">#212121</color>
     <color name="red">#F10505</color>
-    <color name="blue_bg_rating">#071b21</color>
+    <color name="blue_bg_rating">#0D2F4B</color>
     <color name="dark_green">#204528</color>
     <color name="light_green">#31cf79</color>
     <color name="dark_yellow">#393810</color>
     <color name="light_yellow">#d1d530</color>
     <color name="white">#FFFFFF</color>
+    <color name="grey_title">#cdcdcd</color>
 </resources>

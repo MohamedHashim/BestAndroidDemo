@@ -13,5 +13,5 @@ data class MovieResponse(
     val release_date: String,
     val poster_path: String
 ) {
-    fun toDomainObject() = Movie(id, title, vote_average, release_date, poster_path)
+    fun toDomainObject() = Movie(id, title, vote_average.toInt(), release_date, poster_path)
 }

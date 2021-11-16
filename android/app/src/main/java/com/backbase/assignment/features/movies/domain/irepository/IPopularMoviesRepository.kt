@@ -10,5 +10,5 @@ import kotlinx.coroutines.flow.Flow
  */
 
 interface IPopularMoviesRepository {
-    suspend fun popularMovies(): Flow<Either<Failure, List<Movie>>>
+    suspend fun popularMovies(page: Int): Flow<Either<Failure, List<Movie>>>
 }

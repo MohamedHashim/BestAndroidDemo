@@ -45,7 +45,7 @@ class PopularMoviesRepositoryTest : UnitTest() {
         every { moviesResponse.isSuccessful } returns true
         coEvery { apiService.getPopularMovies() } returns moviesResponse
 
-        val movies = popularMoviesRepository.popularMovies()
+        val movies = popularMoviesRepository.popularMovies(1)
         movies.collect { a ->
             assertThat(a).isEqualTo(Either.Left(Failure.DataError))
         }
@@ -57,7 +57,7 @@ class PopularMoviesRepositoryTest : UnitTest() {
             every { moviesResponse.isSuccessful } returns false
             coEvery { apiService.getPopularMovies() } returns moviesResponse
 
-            val movies = popularMoviesRepository.popularMovies()
+            val movies = popularMoviesRepository.popularMovies(1)
             movies.collect { a ->
                 assertThat(a).isEqualTo(Either.Left(Failure.ServerError))
             }
@@ -82,7 +82,7 @@ class PopularMoviesRepositoryTest : UnitTest() {
         every { moviesResponse.isSuccessful } returns true
         coEvery { apiService.getPopularMovies() } returns moviesResponse
 
-        val movies = popularMoviesRepository.popularMovies()
+        val movies = popularMoviesRepository.popularMovies(1)
         movies.collect { a ->
             assertThat(a).isEqualTo(Either.Right(popularMovieResponse.results.map { it.toDomainObject() }))
         }

@@ -1,4 +1,4 @@
-package com.backbase.assignment.ui
+package com.backbase.assignment.features.movies.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

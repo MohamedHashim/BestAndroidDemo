@@ -25,7 +25,8 @@ ext {
             coroutinesAndroid : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$LibrariesVersion.coroutines",
             navigationFragment: "androidx.navigation:navigation-fragment-ktx:$LibrariesVersion.navigation",
             navigationUi      : "androidx.navigation:navigation-ui-ktx:$LibrariesVersion.navigation",
-            glide             : "com.github.bumptech.glide:glide:$LibrariesVersion.glide"
+            glide             : "com.github.bumptech.glide:glide:$LibrariesVersion.glide",
+            rvPaging            : "com.github.skydoves:baserecyclerviewadapter:$LibrariesVersion.paging"
     ]
 
     TestLibraries = [

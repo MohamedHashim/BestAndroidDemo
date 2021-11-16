@@ -17,6 +17,7 @@
         android:layout_height="match_parent"
         android:background="@color/darkBackground">
 
+        <!--Now playing movies feature-->
         <ImageView
             android:id="@+id/iv_movie_box"
             android:layout_width="@dimen/logoWidth"
@@ -75,5 +76,36 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_now_playing_header"
             tools:ignore="RtlSymmetry" />
+
+        <!--Popular movies feature-->
+        <TextView
+            android:id="@+id/tv_popular_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_17"
+            android:background="@color/grey"
+            android:paddingStart="@dimen/padding_21"
+            android:paddingTop="@dimen/padding_4"
+            android:paddingBottom="@dimen/padding_6"
+            android:text="@string/most_popular"
+            android:textAppearance="@style/HeaderTextAppearance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_now_playing_movies"
+            tools:ignore="RtlSymmetry" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_popular_movies"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:paddingTop="5dp"
+            android:background="@color/grey"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_popular_header"
+            tools:listitem="@layout/movie_item" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

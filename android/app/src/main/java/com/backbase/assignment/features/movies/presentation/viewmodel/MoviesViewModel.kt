@@ -9,6 +9,7 @@ import com.backbase.assignment.core.exceptions.Failure
 import com.backbase.assignment.features.movies.domain.model.Movie
 import com.backbase.assignment.features.movies.domain.usecases.GetNowPlayingMoviesUseCase
 import com.backbase.assignment.features.movies.domain.usecases.GetPopularMoviesUseCase
+import com.backbase.assignment.features.movies.presentation.mapper.toPopularMoviePresentation
 import com.backbase.assignment.features.movies.presentation.mapper.toPresentation
 import com.backbase.assignment.features.movies.presentation.model.state.NowPlayingMovieView
 import com.backbase.assignment.features.movies.presentation.model.state.PopularMovieView
@@ -94,9 +95,54 @@ class MoviesViewModel @Inject constructor(
     /**
      * get popular movies with success and error handling
      */
-    fun getPopularMovies(page: Int) {
+    fun getPopularMovies(page: Int = 1) {
         _popularMoviesView.value = PopularMovieView(isLoading = true)
-        getPopularMoviesUseCase(job, params = page)
+        getPopularMoviesUseCase(job, params = page) {
+            it.fold(::handlePopularMoviesFailure, ::handlePopularMoviesSuccess)
+        }
+    }
+
+    /**
+     * popular movies success handling
+     */
+    private fun handlePopularMoviesSuccess(movies: List<Movie>) {
+
+        if (movies.isEmpty()) {
+            _popularMoviesView.value = PopularMovieView(
+                isEmpty = true,
+                errorMessage = resources.getString(R.string.empty_error)
+            )
+        } else {
+            _popularMoviesView.postValue(
+                PopularMovieView(movies = movies.map { it.toPopularMoviePresentation() })
+            )
+        }
+    }
+
+    /**
+     * popular movies error handling
+     */
+    @Suppress("UNUSED_PARAMETER")
+    private fun handlePopularMoviesFailure(failure: Failure) {
+
+        when (failure) {
+            Failure.DataError -> {
+                _popularMoviesView.value =
+                    PopularMovieView(
+                        errorMessage = resources.getString(
+                            R.string.data_error
+                        )
+                    )
+            }
+            Failure.ServerError -> {
+                _popularMoviesView.value =
+                    PopularMovieView(
+                        errorMessage = resources.getString(
+                            R.string.server_error
+                        )
+                    )
+            }
+        }
     }
 
     /**

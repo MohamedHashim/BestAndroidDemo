@@ -1,4 +1,4 @@
-package com.backbase.assignment.ui.custom
+package com.backbase.assignment.features.movies.presentation.ui.custom
 
 import android.content.Context
 import android.util.AttributeSet

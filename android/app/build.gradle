@@ -82,6 +82,9 @@ dependencies {
     //glide
     implementation Libraries.glide
 
+    // recylerview paging
+    implementation Libraries.rvPaging
+
     //testing
     testImplementation TestLibraries.testCore
     testImplementation TestLibraries.archCore

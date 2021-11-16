@@ -18,8 +18,8 @@
         <ImageView
             android:id="@+id/poster"
             bindingPosterUrl="@{movie.posterPath}"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="47dp"
+            android:layout_height="71dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
@@ -50,11 +50,24 @@
 
         <com.backbase.assignment.features.movies.presentation.ui.custom.RatingView
             android:id="@+id/rating"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="@dimen/header_text_size"
+            app:layout_constraintBottom_toBottomOf="@id/rating"
+            app:layout_constraintEnd_toEndOf="@id/rating"
+            app:layout_constraintStart_toStartOf="@id/rating"
+            app:layout_constraintTop_toTopOf="@+id/rating"
+            tools:text="34%" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

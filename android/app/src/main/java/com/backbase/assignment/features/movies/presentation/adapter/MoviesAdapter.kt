@@ -1,7 +1,9 @@
 package com.backbase.assignment.features.movies.presentation.adapter
 
+import android.annotation.SuppressLint
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import com.backbase.assignment.R
 import com.backbase.assignment.databinding.MovieItemBinding
@@ -45,12 +47,28 @@ class MoviesViewHolder(
     private lateinit var movie: PopularMoviePresentation
     private val binding by bindings<MovieItemBinding>(view)
 
+    @SuppressLint("SetTextI18n")
     override fun bindData(data: Any) {
         if (data is PopularMoviePresentation) {
             movie = data
             binding.apply {
                 ViewCompat.setTransitionName(binding.itemMovieContainer, data.title)
                 movie = data
+                val ratingValue = data.rating * 10f
+                if (ratingValue >= 50) {
+                    rating.fillArcPaint.color = ContextCompat.getColor(context, R.color.light_green)
+                    rating.parentArcPaint.color =
+                        ContextCompat.getColor(context, R.color.dark_green)
+                } else {
+                    rating.fillArcPaint.color =
+                        ContextCompat.getColor(context, R.color.light_yellow)
+                    rating.parentArcPaint.color =
+                        ContextCompat.getColor(context, R.color.dark_yellow)
+                }
+                tvRating.text = "$ratingValue%"
+                rating.currentPercentage = ratingValue
+                rating.animateProgress()
+
                 executePendingBindings()
             }
         }

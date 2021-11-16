@@ -43,7 +43,7 @@ class PopularMoviesRepositoryTest : UnitTest() {
     fun `getPopularMovies with null responseBody should return data error`() = runBlockingTest {
         every { moviesResponse.body() } returns null
         every { moviesResponse.isSuccessful } returns true
-        coEvery { apiService.getPopularMovies() } returns moviesResponse
+        coEvery { apiService.getPopularMovies(page = "1") } returns moviesResponse
 
         val movies = popularMoviesRepository.popularMovies(1)
         movies.collect { a ->
@@ -55,7 +55,7 @@ class PopularMoviesRepositoryTest : UnitTest() {
     fun `getPopularMovies should return server error when response is not successful`() =
         runBlockingTest {
             every { moviesResponse.isSuccessful } returns false
-            coEvery { apiService.getPopularMovies() } returns moviesResponse
+            coEvery { apiService.getPopularMovies(page = "1") } returns moviesResponse
 
             val movies = popularMoviesRepository.popularMovies(1)
             movies.collect { a ->
@@ -80,7 +80,7 @@ class PopularMoviesRepositoryTest : UnitTest() {
         )
         every { moviesResponse.body() } returns popularMovieResponse
         every { moviesResponse.isSuccessful } returns true
-        coEvery { apiService.getPopularMovies() } returns moviesResponse
+        coEvery { apiService.getPopularMovies(page = "1") } returns moviesResponse
 
         val movies = popularMoviesRepository.popularMovies(1)
         movies.collect { a ->

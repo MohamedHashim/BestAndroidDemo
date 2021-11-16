@@ -15,13 +15,14 @@ import javax.inject.Singleton
  */
 
 @Singleton
-class PopularMoviesRepository @Inject constructor(private val apiService: MovieApi) :
-    IPopularMoviesRepository {
+class PopularMoviesRepository @Inject constructor(
+    private val apiService: MovieApi
+) : IPopularMoviesRepository {
 
     /**
      *  fetch popular movies data and emit success and failure response
      */
-    override suspend fun popularMovies(page: Int): Flow<Either<Failure, List<Movie>>> =
+    override suspend fun popularMovies(page: Int?): Flow<Either<Failure, List<Movie>>> =
         flow {
             val response =
                 apiService.getPopularMovies(page = page.toString())

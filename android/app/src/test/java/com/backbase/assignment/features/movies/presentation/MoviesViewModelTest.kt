@@ -53,7 +53,7 @@ class MoviesViewModelTest : UnitTest() {
             Movie(
                 id = 123,
                 "End Game",
-                5.6f,
+                56,
                 "29-12-2021",
                 "/d5NXSklXo0qyIYkgV94XAgMIckC.jpg"
             )
@@ -131,7 +131,7 @@ class MoviesViewModelTest : UnitTest() {
 
     @Test
     fun `getPopularMovies should return movies list on success`() {
-        every { getPopularMoviesUseCase(any(), onResult = any()) }.answers {
+        every { getPopularMoviesUseCase(any(), onResult = any(), params = any()) }.answers {
             thirdArg<(Either<Failure, List<Movie>>) -> Unit>()(Either.Right(movies))
         }
         moviesViewModel.getPopularMovies(page)
@@ -145,7 +145,7 @@ class MoviesViewModelTest : UnitTest() {
 
     @Test
     fun `getPopularMovies should show empty view when list of movies is empty`() {
-        every { getPopularMoviesUseCase(any(), onResult = any()) }.answers {
+        every { getPopularMoviesUseCase(any(), onResult = any(), params = any()) }.answers {
             thirdArg<(Either<Failure, List<Movie>>) -> Unit>()(Either.Right(emptyList()))
         }
         moviesViewModel.getPopularMovies(page)
@@ -160,7 +160,7 @@ class MoviesViewModelTest : UnitTest() {
 
     @Test
     fun `getPopularMovies should show error when a server error occur`() {
-        every { getPopularMoviesUseCase(any(), onResult = any()) }.answers {
+        every { getPopularMoviesUseCase(any(), onResult = any(), params = any()) }.answers {
             thirdArg<(Either<Failure, List<Movie>>) -> Unit>()(Either.Left(Failure.ServerError))
         }
         moviesViewModel.getPopularMovies(page)
@@ -175,7 +175,7 @@ class MoviesViewModelTest : UnitTest() {
 
     @Test
     fun `getPopularMovies should show error when a data error occur`() {
-        every { getPopularMoviesUseCase(any(), onResult = any()) }.answers {
+        every { getPopularMoviesUseCase(any(), onResult = any(), params = any()) }.answers {
             thirdArg<(Either<Failure, List<Movie>>) -> Unit>()(Either.Left(Failure.DataError))
         }
         moviesViewModel.getPopularMovies(page)

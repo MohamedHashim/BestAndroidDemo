@@ -68,6 +68,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_17"
+            android:layout_marginEnd="6dp"
+            android:padding="50dp"
             android:paddingStart="@dimen/padding_21"
             android:text="@{moviesViewModel.nowPlayingMoviesView.errorMessage}"
             android:textAppearance="@style/ErrorTextAppearance"
@@ -102,11 +104,26 @@
             android:background="@color/grey"
             android:clipToPadding="false"
             android:paddingTop="5dp"
+            android:visibility="@{moviesViewModel.popularMoviesView.movies != null ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_popular_header"
             tools:listitem="@layout/movie_item" />
+
+        <!--present empty data error-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_17"
+            android:paddingStart="@dimen/padding_21"
+            android:text="@{moviesViewModel.popularMoviesView.errorMessage}"
+            android:textAppearance="@style/ErrorTextAppearance"
+            android:visibility="@{moviesViewModel.popularMoviesView.empty||moviesViewModel.popularMoviesView.errorMessage!=null ? View.VISIBLE : View.GONE, default=gone}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_popular_header"
+            tools:ignore="RtlSymmetry" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

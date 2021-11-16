@@ -9,6 +9,8 @@ import com.backbase.assignment.core.exceptions.Failure
 import com.backbase.assignment.core.functional.Either
 import com.backbase.assignment.features.movies.domain.model.Movie
 import com.backbase.assignment.features.movies.domain.usecases.GetNowPlayingMoviesUseCase
+import com.backbase.assignment.features.movies.domain.usecases.GetPopularMoviesUseCase
+import com.backbase.assignment.features.movies.presentation.mapper.toPopularMoviePresentation
 import com.backbase.assignment.features.movies.presentation.mapper.toPresentation
 import com.backbase.assignment.features.movies.presentation.viewmodel.MoviesViewModel
 import com.backbase.assignment.getOrAwaitValueTest
@@ -34,10 +36,14 @@ class MoviesViewModelTest : UnitTest() {
     @MockK
     private lateinit var getNowPlayingMoviesUseCase: GetNowPlayingMoviesUseCase
 
+    @MockK
+    private lateinit var getPopularMoviesUseCase: GetPopularMoviesUseCase
+
     private lateinit var application: Application
 
     private lateinit var moviesViewModel: MoviesViewModel
     private lateinit var movies: List<Movie>
+    private val page = 1
 
     @Before
     fun setup() {
@@ -53,8 +59,12 @@ class MoviesViewModelTest : UnitTest() {
             )
         )
         moviesViewModel =
-            MoviesViewModel(application, getNowPlayingMoviesUseCase)
+            MoviesViewModel(application, getNowPlayingMoviesUseCase, getPopularMoviesUseCase)
     }
+
+    /**
+     * Testing now playing movies feature
+     */
 
     @Test
     fun `getNowPlayingMovies should return movies list on success`() {
@@ -108,6 +118,69 @@ class MoviesViewModelTest : UnitTest() {
         moviesViewModel.getNowPlayingMovies()
 
         val res = moviesViewModel.nowPlayingMoviesView.getOrAwaitValueTest()
+        assertThat(res.errorMessage).isNotNull()
+        assertThat(res.errorMessage).containsMatch("Data Error : There is no data to show")
+        assertThat(res.isLoading).isFalse()
+        assertThat(res.isEmpty).isFalse()
+        assertThat(res.movies).isNull()
+    }
+
+    /**
+     * Testing popular movies feature
+     */
+
+    @Test
+    fun `getPopularMovies should return movies list on success`() {
+        every { getPopularMoviesUseCase(any(), onResult = any()) }.answers {
+            thirdArg<(Either<Failure, List<Movie>>) -> Unit>()(Either.Right(movies))
+        }
+        moviesViewModel.getPopularMovies(page)
+
+        val res = moviesViewModel.popularMoviesView.getOrAwaitValueTest()
+        assertThat(res.errorMessage).isNull()
+        assertThat(res.isLoading).isFalse()
+        assertThat(res.isEmpty).isFalse()
+        assertThat(res.movies).isEqualTo(movies.map { it.toPopularMoviePresentation() })
+    }
+
+    @Test
+    fun `getPopularMovies should show empty view when list of movies is empty`() {
+        every { getPopularMoviesUseCase(any(), onResult = any()) }.answers {
+            thirdArg<(Either<Failure, List<Movie>>) -> Unit>()(Either.Right(emptyList()))
+        }
+        moviesViewModel.getPopularMovies(page)
+
+        val res = moviesViewModel.popularMoviesView.getOrAwaitValueTest()
+        assertThat(res.errorMessage).isNotNull()
+        assertThat(res.errorMessage).containsMatch("There is no data to show")
+        assertThat(res.isLoading).isFalse()
+        assertThat(res.isEmpty).isTrue()
+        assertThat(res.movies).isNull()
+    }
+
+    @Test
+    fun `getPopularMovies should show error when a server error occur`() {
+        every { getPopularMoviesUseCase(any(), onResult = any()) }.answers {
+            thirdArg<(Either<Failure, List<Movie>>) -> Unit>()(Either.Left(Failure.ServerError))
+        }
+        moviesViewModel.getPopularMovies(page)
+
+        val res = moviesViewModel.popularMoviesView.getOrAwaitValueTest()
+        assertThat(res.errorMessage).isNotNull()
+        assertThat(res.errorMessage).containsMatch("Server Error : Could not retrieve data from servers")
+        assertThat(res.isLoading).isFalse()
+        assertThat(res.isEmpty).isFalse()
+        assertThat(res.movies).isNull()
+    }
+
+    @Test
+    fun `getPopularMovies should show error when a data error occur`() {
+        every { getPopularMoviesUseCase(any(), onResult = any()) }.answers {
+            thirdArg<(Either<Failure, List<Movie>>) -> Unit>()(Either.Left(Failure.DataError))
+        }
+        moviesViewModel.getPopularMovies(page)
+
+        val res = moviesViewModel.popularMoviesView.getOrAwaitValueTest()
         assertThat(res.errorMessage).isNotNull()
         assertThat(res.errorMessage).containsMatch("Data Error : There is no data to show")
         assertThat(res.isLoading).isFalse()

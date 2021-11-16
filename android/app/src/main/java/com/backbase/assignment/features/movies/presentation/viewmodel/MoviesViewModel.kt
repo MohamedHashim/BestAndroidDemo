@@ -8,8 +8,10 @@ import com.backbase.assignment.R
 import com.backbase.assignment.core.exceptions.Failure
 import com.backbase.assignment.features.movies.domain.model.Movie
 import com.backbase.assignment.features.movies.domain.usecases.GetNowPlayingMoviesUseCase
+import com.backbase.assignment.features.movies.domain.usecases.GetPopularMoviesUseCase
 import com.backbase.assignment.features.movies.presentation.mapper.toPresentation
 import com.backbase.assignment.features.movies.presentation.model.state.NowPlayingMovieView
+import com.backbase.assignment.features.movies.presentation.model.state.PopularMovieView
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import javax.inject.Inject
@@ -21,7 +23,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MoviesViewModel @Inject constructor(
     application: Application,
-    private val getNowPlayingMoviesUseCase: GetNowPlayingMoviesUseCase
+    private val getNowPlayingMoviesUseCase: GetNowPlayingMoviesUseCase,
+    private val getPopularMoviesUseCase: GetPopularMoviesUseCase
 ) : AndroidViewModel(application) {
 
     private val job = Job()
@@ -30,6 +33,10 @@ class MoviesViewModel @Inject constructor(
     private val _nowPlayingMoviesView = MutableLiveData<NowPlayingMovieView>()
     val nowPlayingMoviesView: LiveData<NowPlayingMovieView>
         get() = _nowPlayingMoviesView
+
+    private val _popularMoviesView = MutableLiveData<PopularMovieView>()
+    val popularMoviesView: LiveData<PopularMovieView>
+        get() = _popularMoviesView
 
     /**
      * get now playing movies with success and error handling
@@ -82,6 +89,14 @@ class MoviesViewModel @Inject constructor(
                     )
             }
         }
+    }
+
+    /**
+     * get popular movies with success and error handling
+     */
+    fun getPopularMovies(page: Int) {
+        _popularMoviesView.value = PopularMovieView(isLoading = true)
+        getPopularMoviesUseCase(job, params = page)
     }
 
     /**

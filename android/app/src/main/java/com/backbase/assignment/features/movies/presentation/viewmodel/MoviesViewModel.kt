@@ -22,16 +22,18 @@ import javax.inject.Inject
 class MoviesViewModel @Inject constructor(
     application: Application,
     private val getNowPlayingMoviesUseCase: GetNowPlayingMoviesUseCase
-) :
-    AndroidViewModel(application) {
+) : AndroidViewModel(application) {
 
     private val job = Job()
-    private val resources = getApplication<Application>().applicationContext.resources
+    private val resources = application.resources
 
     private val _nowPlayingMoviesView = MutableLiveData<NowPlayingMovieView>()
     val nowPlayingMoviesView: LiveData<NowPlayingMovieView>
         get() = _nowPlayingMoviesView
 
+    /**
+     * get now playing movies with success and error handling
+     */
     fun getNowPlayingMovies() {
         _nowPlayingMoviesView.value = NowPlayingMovieView(isLoading = true)
         getNowPlayingMoviesUseCase(job) {
@@ -39,16 +41,26 @@ class MoviesViewModel @Inject constructor(
         }
     }
 
+    /**
+     * now playing movies success handling
+     */
     private fun handleMoviesSuccess(movies: List<Movie>) {
 
         if (movies.isEmpty()) {
-            _nowPlayingMoviesView.value = NowPlayingMovieView(isEmpty = true)
+            _nowPlayingMoviesView.value = NowPlayingMovieView(
+                isEmpty = true,
+                errorMessage = resources.getString(R.string.empty_error)
+            )
         } else {
-            _nowPlayingMoviesView.value =
+            _nowPlayingMoviesView.postValue(
                 NowPlayingMovieView(movies = movies.map { it.toPresentation() })
+            )
         }
     }
 
+    /**
+     * now playing movies error handling
+     */
     @Suppress("UNUSED_PARAMETER")
     private fun handleMoviesFailure(failure: Failure) {
 
@@ -72,6 +84,9 @@ class MoviesViewModel @Inject constructor(
         }
     }
 
+    /**
+     * clear job to avoid memory leak
+     */
     override fun onCleared() {
         job.cancel()
         super.onCleared()

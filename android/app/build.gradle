@@ -19,7 +19,8 @@ android {
         targetSdkVersion AndroidSdk.targetSdk
         versionCode App.versionCode
         versionName App.versionName
-        testInstrumentationRunner App.testRunner
+        testInstrumentationRunner "com.backbase.assignment.CustomTestRunner"
+
         // themoviedb API key
         buildConfigField "String", "API_KEY", localProperties['API_KEY']
     }
@@ -33,6 +34,17 @@ android {
             applicationIdSuffix ".debug"
             versionNameSuffix "-debug"
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+        dataBinding true
     }
 }
 
@@ -67,6 +79,9 @@ dependencies {
     implementation Libraries.navigationFragment
     implementation Libraries.navigationUi
 
+    //glide
+    implementation Libraries.glide
+
     //testing
     testImplementation TestLibraries.testCore
     testImplementation TestLibraries.archCore
@@ -85,7 +100,7 @@ dependencies {
     androidTestImplementation TestLibraries.truth
     androidTestImplementation TestLibraries.coroutines
     androidTestImplementation TestLibraries.testRunner
-    androidTestImplementation TestLibraries.hilt
+    androidTestImplementation TestLibraries.hiltTesting
     kaptAndroidTest TestLibraries.hiltKapt
     androidTestImplementation TestLibraries.espresso
 }

@@ -4,4 +4,6 @@
     <string name="server_error">Server Error : Could not retrieve data from servers</string>
     <string name="movie_box_logo">Movie box logo</string>
     <string name="playing_now">Playing now</string>
+    <string name="playing_now_movie">playing now movie</string>
+    <string name="empty_error">There is no data to show</string>
 </resources>

@@ -1,40 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/darkBackground">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/iv_movie_box"
-        android:layout_width="@dimen/logoWidth"
-        android:layout_height="@dimen/logoHeight"
-        android:layout_marginTop="@dimen/margin_29"
-        android:contentDescription="@string/movie_box_logo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_movie_box" />
+    <data>
 
-    <TextView
-        android:id="@+id/tv_now_playing_header"
+        <import type="android.view.View" />
+
+        <variable
+            name="moviesViewModel"
+            type="com.backbase.assignment.features.movies.presentation.viewmodel.MoviesViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_17"
-        android:background="@color/grey"
-        android:paddingStart="@dimen/padding_21"
-        android:paddingTop="@dimen/padding_4"
-        android:paddingBottom="@dimen/padding_6"
-        android:text="@string/playing_now"
-        android:textAppearance="@style/HeaderTextAppearance"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_movie_box"
-        tools:ignore="RtlSymmetry" />
+        android:layout_height="match_parent"
+        android:background="@color/darkBackground">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/tv_now_playing_header" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/iv_movie_box"
+            android:layout_width="@dimen/logoWidth"
+            android:layout_height="@dimen/logoHeight"
+            android:layout_marginTop="@dimen/margin_29"
+            android:contentDescription="@string/movie_box_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_movie_box" />
+
+        <TextView
+            android:id="@+id/tv_now_playing_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_17"
+            android:background="@color/grey"
+            android:paddingStart="@dimen/padding_21"
+            android:paddingTop="@dimen/padding_4"
+            android:paddingBottom="@dimen/padding_6"
+            android:text="@string/playing_now"
+            android:textAppearance="@style/HeaderTextAppearance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_movie_box"
+            tools:ignore="RtlSymmetry" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_now_playing_movies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{moviesViewModel.nowPlayingMoviesView.movies != null ? View.VISIBLE : View.GONE, default=gone}"
+            app:layout_constraintTop_toBottomOf="@+id/tv_now_playing_header"
+            tools:listitem="@layout/item_now_playing_movie" />
+
+        <!--loading progressbar-->
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{moviesViewModel.nowPlayingMoviesView.loading ? View.VISIBLE : View.GONE, default=visible}"
+            app:layout_constraintBottom_toBottomOf="@+id/rv_now_playing_movies"
+            app:layout_constraintEnd_toEndOf="@+id/rv_now_playing_movies"
+            app:layout_constraintStart_toStartOf="@+id/rv_now_playing_movies"
+            app:layout_constraintTop_toTopOf="@+id/rv_now_playing_movies" />
+
+        <!--present empty data error-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_17"
+            android:paddingStart="@dimen/padding_21"
+            android:text="@{moviesViewModel.nowPlayingMoviesView.errorMessage}"
+            android:textAppearance="@style/ErrorTextAppearance"
+            android:visibility="@{moviesViewModel.nowPlayingMoviesView.empty||moviesViewModel.nowPlayingMoviesView.errorMessage!=null ? View.VISIBLE : View.GONE, default=gone}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_now_playing_header"
+            tools:ignore="RtlSymmetry" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

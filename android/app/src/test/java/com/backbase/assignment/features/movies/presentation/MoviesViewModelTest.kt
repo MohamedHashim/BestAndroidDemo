@@ -58,7 +58,7 @@ class MoviesViewModelTest : UnitTest() {
 
     @Test
     fun `getNowPlayingMovies should return movies list on success`() {
-        every { getNowPlayingMoviesUseCase(any()) }.answers {
+        every { getNowPlayingMoviesUseCase(any(), onResult = any()) }.answers {
             thirdArg<(Either<Failure, List<Movie>>) -> Unit>()(Either.Right(movies))
         }
         moviesViewModel.getNowPlayingMovies()
@@ -72,13 +72,14 @@ class MoviesViewModelTest : UnitTest() {
 
     @Test
     fun `getNowPlayingMovies should show empty view when list of movies is empty`() {
-        every { getNowPlayingMoviesUseCase(any()) }.answers {
+        every { getNowPlayingMoviesUseCase(any(), onResult = any()) }.answers {
             thirdArg<(Either<Failure, List<Movie>>) -> Unit>()(Either.Right(emptyList()))
         }
         moviesViewModel.getNowPlayingMovies()
 
         val res = moviesViewModel.nowPlayingMoviesView.getOrAwaitValueTest()
-        assertThat(res.errorMessage).isNull()
+        assertThat(res.errorMessage).isNotNull()
+        assertThat(res.errorMessage).containsMatch("There is no data to show")
         assertThat(res.isLoading).isFalse()
         assertThat(res.isEmpty).isTrue()
         assertThat(res.movies).isNull()
@@ -86,7 +87,7 @@ class MoviesViewModelTest : UnitTest() {
 
     @Test
     fun `getNowPlayingMovies should show error when a server error occur`() {
-        every { getNowPlayingMoviesUseCase(any()) }.answers {
+        every { getNowPlayingMoviesUseCase(any(), onResult = any()) }.answers {
             thirdArg<(Either<Failure, List<Movie>>) -> Unit>()(Either.Left(Failure.ServerError))
         }
         moviesViewModel.getNowPlayingMovies()
@@ -101,7 +102,7 @@ class MoviesViewModelTest : UnitTest() {
 
     @Test
     fun `getNowPlayingMovies should show error when a data error occur`() {
-        every { getNowPlayingMoviesUseCase(any()) }.answers {
+        every { getNowPlayingMoviesUseCase(any(), onResult = any()) }.answers {
             thirdArg<(Either<Failure, List<Movie>>) -> Unit>()(Either.Left(Failure.DataError))
         }
         moviesViewModel.getNowPlayingMovies()

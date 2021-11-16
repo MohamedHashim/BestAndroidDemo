@@ -6,7 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.backbase.assignment.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.backbase.assignment.databinding.FragmentMoviesBinding
+import com.backbase.assignment.features.movies.presentation.adapter.NowPlayingMoviesAdapter
+import com.backbase.assignment.features.movies.presentation.model.NowPlayingMoviePresentation
 import com.backbase.assignment.features.movies.presentation.viewmodel.MoviesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,14 +19,59 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MoviesFragment : Fragment() {
 
+    private var _binding: FragmentMoviesBinding? = null
+    private val binding get() = _binding!!
     private val moviesViewModel: MoviesViewModel by viewModels()
+    private lateinit var nowPlayingMoviesAdapter: NowPlayingMoviesAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        _binding = FragmentMoviesBinding.inflate(inflater, container, false)
+        binding.moviesViewModel = moviesViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+
         moviesViewModel.getNowPlayingMovies()
-        return inflater.inflate(R.layout.fragment_movies, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        observeNowPlayingMoviesView()
+    }
+
+    /**
+     * Observe now playing view state
+     */
+    private fun observeNowPlayingMoviesView() {
+        this.moviesViewModel.nowPlayingMoviesView.observe(
+            viewLifecycleOwner,
+            { nowPlayingMoviesView ->
+                if (nowPlayingMoviesView.movies != null)
+                    setupNowPlayingMoviesAdapter(nowPlayingMoviesView.movies)
+            }
+        )
+    }
+
+    /**
+     * Initialize now playing movies adapter
+     */
+    private fun setupNowPlayingMoviesAdapter(movies: List<NowPlayingMoviePresentation>?) {
+        nowPlayingMoviesAdapter =
+            NowPlayingMoviesAdapter(movies)
+        val linearLayoutManager = LinearLayoutManager(this.context)
+        linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        binding.rvNowPlayingMovies.layoutManager = linearLayoutManager
+        binding.rvNowPlayingMovies.adapter = nowPlayingMoviesAdapter
+    }
+
+    /**
+     * clear binding to avoid memory leaks
+     */
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

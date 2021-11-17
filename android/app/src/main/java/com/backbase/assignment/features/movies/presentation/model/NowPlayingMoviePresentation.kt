@@ -5,5 +5,6 @@ package com.backbase.assignment.features.movies.presentation.model
  */
 
 data class NowPlayingMoviePresentation(
+    val id: Int,
     val posterPath: String
 )

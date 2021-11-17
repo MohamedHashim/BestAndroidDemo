@@ -17,7 +17,7 @@ import com.skydoves.baserecyclerviewadapter.SectionRow
  */
 
 class MoviesAdapter(
-    private val delegate: MoviesViewHolder.Delegate
+    private val delegate: ClickListener
 ) : BaseAdapter() {
 
     init {
@@ -37,12 +37,8 @@ class MoviesAdapter(
 
 class MoviesViewHolder(
     view: View,
-    private val delegate: Delegate
+    private val delegate: ClickListener
 ) : BaseViewHolder(view) {
-
-    interface Delegate {
-        fun onItemClick(view: View, movie: PopularMoviePresentation)
-    }
 
     private lateinit var movie: PopularMoviePresentation
     private val binding by bindings<MovieItemBinding>(view)
@@ -74,7 +70,8 @@ class MoviesViewHolder(
         }
     }
 
-    override fun onClick(v: View?) = delegate.onItemClick(binding.itemMovieContainer, movie)
+    override fun onClick(v: View?) =
+        delegate.onPopularMovieClick(binding.itemMovieContainer, movie.id)
 
     override fun onLongClick(v: View?): Boolean {
         Toast.makeText(context, movie.title, Toast.LENGTH_SHORT).show()

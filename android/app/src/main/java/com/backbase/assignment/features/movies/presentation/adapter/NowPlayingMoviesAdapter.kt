@@ -10,14 +10,17 @@ import com.backbase.assignment.features.movies.presentation.model.NowPlayingMovi
  * Created by Mohamed Hashim on 15/11/2021.
  */
 
-class NowPlayingMoviesAdapter(private val movies: List<NowPlayingMoviePresentation>?) :
+class NowPlayingMoviesAdapter(
+    private val movies: List<NowPlayingMoviePresentation>?,
+    private val delegate: ClickListener
+) :
     RecyclerView.Adapter<NowPlayingMoviesAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemNowPlayingMovieBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
 
-        return ViewHolder(binding)
+        return ViewHolder(binding, delegate)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -29,10 +32,15 @@ class NowPlayingMoviesAdapter(private val movies: List<NowPlayingMoviePresentati
         return movies?.size!!
     }
 
-    class ViewHolder(private val binding: ItemNowPlayingMovieBinding) :
+    class ViewHolder(
+        private val binding: ItemNowPlayingMovieBinding,
+        private val delegate: ClickListener
+    ) :
         RecyclerView.ViewHolder(binding.root) {
+
         fun bind(movie: NowPlayingMoviePresentation?) {
             binding.movie = movie
+            binding.root.setOnClickListener { delegate.onNowPlayingMovieClick(movie?.id!!) }
         }
     }
 }

@@ -9,7 +9,7 @@ import com.backbase.assignment.features.movies.presentation.model.PopularMoviePr
  */
 
 fun Movie.toPresentation() = NowPlayingMoviePresentation(
-
+    id = id,
     posterPath = posterPath
 )
 

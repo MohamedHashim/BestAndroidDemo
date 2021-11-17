@@ -10,8 +10,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.backbase.assignment.R
 import com.backbase.assignment.databinding.FragmentMoviesBinding
+import com.backbase.assignment.features.movies.presentation.adapter.ClickListener
 import com.backbase.assignment.features.movies.presentation.adapter.MoviesAdapter
-import com.backbase.assignment.features.movies.presentation.adapter.MoviesViewHolder
 import com.backbase.assignment.features.movies.presentation.adapter.NowPlayingMoviesAdapter
 import com.backbase.assignment.features.movies.presentation.model.NowPlayingMoviePresentation
 import com.backbase.assignment.features.movies.presentation.model.PopularMoviePresentation
@@ -23,7 +23,8 @@ import dagger.hilt.android.AndroidEntryPoint
  * Created by Mohamed Hashim on 15/11/2021.
  */
 @AndroidEntryPoint
-class MoviesFragment : Fragment(), MoviesViewHolder.Delegate {
+class MoviesFragment :
+    Fragment(), ClickListener {
 
     private var _binding: FragmentMoviesBinding? = null
     private val binding get() = _binding!!
@@ -74,7 +75,7 @@ class MoviesFragment : Fragment(), MoviesViewHolder.Delegate {
      */
     private fun setupNowPlayingMoviesAdapter(movies: List<NowPlayingMoviePresentation>?) {
         nowPlayingMoviesAdapter =
-            NowPlayingMoviesAdapter(movies)
+            NowPlayingMoviesAdapter(movies, this)
         val linearLayoutManager = LinearLayoutManager(this.context)
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         binding.rvNowPlayingMovies.layoutManager = linearLayoutManager
@@ -129,10 +130,17 @@ class MoviesFragment : Fragment(), MoviesViewHolder.Delegate {
         _binding = null
     }
 
-    override fun onItemClick(view: View, movie: PopularMoviePresentation) {
+    override fun onPopularMovieClick(view: View, movieId: Int) {
         findNavController().navigate(
             R.id.action_moviesFragment_to_movieDetailsFragment,
-            MoviesViewModel.createArguments(movie.id)
+            MoviesViewModel.createArguments(movieId)
+        )
+    }
+
+    override fun onNowPlayingMovieClick(movieId: Int) {
+        findNavController().navigate(
+            R.id.action_moviesFragment_to_movieDetailsFragment,
+            MoviesViewModel.createArguments(movieId)
         )
     }
 }

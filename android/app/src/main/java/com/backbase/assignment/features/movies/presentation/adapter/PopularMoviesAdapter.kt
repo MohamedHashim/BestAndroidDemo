@@ -16,7 +16,7 @@ import com.skydoves.baserecyclerviewadapter.SectionRow
  * Created by Mohamed Hashim on 16/11/2021.
  */
 
-class MoviesAdapter(
+class PopularMoviesAdapter(
     private val delegate: ClickListener
 ) : BaseAdapter() {
 

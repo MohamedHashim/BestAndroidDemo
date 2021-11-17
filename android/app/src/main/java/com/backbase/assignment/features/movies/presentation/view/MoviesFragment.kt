@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.backbase.assignment.R
 import com.backbase.assignment.databinding.FragmentMoviesBinding
 import com.backbase.assignment.features.movies.presentation.adapter.ClickListener
-import com.backbase.assignment.features.movies.presentation.adapter.MoviesAdapter
+import com.backbase.assignment.features.movies.presentation.adapter.PopularMoviesAdapter
 import com.backbase.assignment.features.movies.presentation.adapter.NowPlayingMoviesAdapter
 import com.backbase.assignment.features.movies.presentation.model.NowPlayingMoviePresentation
 import com.backbase.assignment.features.movies.presentation.model.PopularMoviePresentation
@@ -30,7 +30,7 @@ class MoviesFragment :
     private val binding get() = _binding!!
     private val moviesViewModel: MoviesViewModel by viewModels()
     private lateinit var nowPlayingMoviesAdapter: NowPlayingMoviesAdapter
-    private val adapterMovieList = MoviesAdapter(this)
+    private val adapterMovieList = PopularMoviesAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

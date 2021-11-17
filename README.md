@@ -1,84 +1,69 @@
 # Mobile Assignment CS
-This is a placeholder README file with the instructions for the assingment. We expect you to build your own README file.
+I have built this application in clean architecture and MVVM presentation archticture. It's well tested and documented for all layers data, domain, and presentation.
 
-## Kick off
-In order for us to kick off your assingment, please **[watch this 9 minutes video](https://youtu.be/qUkYkm9bWak)** where we will go through the assingment instructions and answer some of the questions you might have.
+How to build on your environment
+--------------
+For secutity wise, I have hidden my API key from the project and added it in local.properties<br />
+In order to build the project properly in your machince, you have to add your [The Movie DB](https://www.themoviedb.org)'s API key in your `local.properties` file.
+```xml
+API_KEY="YOUR_API_KEY"
+```
 
-## Delivering the code
-* Fork this repo and select the access level as PRIVATE. This is very important. **[Check how to do it here](https://docs.gitlab.com/ee////user/project/working_with_projects.html#fork-a-project)**
-* Do NOT open a PR to this repository.
-* Add the user **m-cs-recruitment@backbase.com** as `Reporter` member **[Check how to do it here](https://docs.gitlab.com/ee/user/project/members/#add-a-user)**
-* Once you are done with the development, send an e-mail to **m-cs-recruitment@backbase.com** AND CC the recruiter who is in touch with you with your info and repo. This helps us to keep track of your progress and move with the process faster.
+## App architecture
+![alt text](https://gitlab.com/MohamedHashim/cs-mobile-assignment/-/blob/84b9d1648c742f33d843ea85ed46755896c9ca7e/android/app_architecture.png "App Architecture")
 
-Please remember to work with small commits, it help us to see how you improve your code :)
+## Decisions
+- Used TDD approach while implementing the project
+- Implemented 2 extra gradle files to organize dependencies versions and groups.
+- Implemented Detct tool to make static analysis and generates reports in ```/app/build/reports/detekt/detekt.html```
+- Created gradle task to read my API key from local.properties
+-Created two build varients one for release and second for debug to see http logs
+- Implemented mappers to map data between the layers
+- Provided error handling in data layer to detect 2 kinds of errors
+  * Server Error : it happens if the server is not responded
+  * Data Error : if there is an error in the response
+- Provided error handling for presentationlayer through modelView, it acts as a state with
+  * isLoading : to show progressbar while data is laoding
+  * errorMessage : to show the error message that happened in the data layer
+  * isEmpty : to show that data is empty and there no thing to be shown
+  * object data : that's the real data that would be shown
+- Used Either concept to perform these error handlings
+- Created separated packages and modules to avoid coupling issue and achieve the Separation of Concerns (SOC) concept
+  * Core package that contains some base and common classes, DI, failure exceptions, and retrofit interceptor
+  * Features package that contains the clean architecture layers (data - domain - presentation) for each screen
+- Used LivDataUtilTest to await the still get the observed data in testing
+- Used Mockk for mocking data
+- Used Truth for testing assertions
+- Used Glide to do caching of loaded images and verified if there is no photo collected, it shows not_found placeholder image
+- Used coroutine and flow to use dispatchers for calling endpoints and emit data to other layers and created it in baseUseCase
+- Used view binding and data binding to update the views like bindingPosterUrl
+- Created animated and custmized RatingView using basic RectF and paints
+- Implemented some styles to make it easier to use them in header, and title text..etc
+- Used android chips to publish genres in details screen
+- Used the excat fonts that used in the design which are helveticaneuelt and helveticaneuelt bold
+- I have created some branches in gitlab for each feature and merge each one into develop branch
 
-## Instructions
+## Assumptions
+- I couldn't extract icons in SVG files so I did web inspections to get the logo and also I used extrnal back button icon
+- In popular endpoint, there is no attribute for movie duration, So I ignored it
+- I tried to follow the deign as much as possiple but there are some missing stuff
 
-You should build an application using the TheMovieDB API. We have provided an initial application that will help you with fast-tracking app development. It contains the following:
-
-* Class containing baseUrl and API key which is needed to fetch contents from TMDB API.
-* Basic implementation of a scrollable list to fetch contents and display them in list format.
-* Basic JSON parsing to parse server response and populate details.
-* Placeholder RatingView class
-
-### UI/UX
-Below you can find the links to the layouts you need to follow. You can inspect each view to get the dimensions:
-
-* [Android](https://app.abstract.com/share/0c431216-05c1-45d7-8304-f9e6566276bf)
-* [iOS](https://app.abstract.com/share/8cb87be4-4250-45e0-9066-abcdf4d5dd79)
-
-### Functionalities
-We expect you to implement the following functionalities in the app:
-
-1. **List horizontally currently playing movies**
-	* Client API details 
-		* GET https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=undefined&api_key=55957fcf3ba81b137f8fc01ac5a31fb5
-		* Only display poster images in the horizontal scrolling list view.
-		* No pagination necessary.
-	
-2. **Display the most popular movies in the vertical list view, with multiple pages**
-	* Client API details  
-		* GET https://api.themoviedb.org/3/movie/popular?api_key=55957fcf3ba81b137f8fc01ac5a31fb5&language=en-US&page=1
-		* Use the parameter page to change the list's page.
-	* Implement the paging mechanism to load a list of movies as the user scrolls down the list.
-	* Cache movie images, in order to make smooth scrolling.
-	* Implement the custom RatingView.
-		* Animation is not necessary.
-		* Use Yellow tint for movie ratings less than 50% and Green for 50% and above.
-	* Each list item will contain the following:
-		* Poster image
-		* Title
-		* Rating
-		* Duration
-		* Release date
-	
-3. **When a user clicks on any movie list item, it will navigate to a detailed screen, with more information about the movie**
-	* Client API details 
-		* GET https://api.themoviedb.org/3/movie/{MOVIE_ID}?api_key=55957fcf3ba81b137f8fc01ac5a31fb5&language=en-US
-		* Where MOVIE_ID should be replaced with the id of the movie.
-		* Example: https://api.themoviedb.org/3/movie/464052?api_key=55957fcf3ba81b137f8fc01ac5a31fb5&language=en-US
-	* Detail screen should contain the following information:
-		* Poster image 
-		* Use the API as per described: https://developers.themoviedb.org/3/getting-started/images
-		* Duration
-		* Title
-		* Overview
-		* Release date
-		* List of genres
-	
-### Additional Requirements And Restrictions
-We expect you to follow this additional requirements and restrictions, as it will be part of how we evaluate your assignment:
-
-1. Provide Unit Tests. This is very important for us to evaluate your level of seniority, so please spare some time to spend on developing Unit Tests.
-2. 3rd party libraries are allowed (except for the rating view). However, do not use any Alpha version of libraries.
-3. This is not an ordinary assignment. If you notice any strange behavior, you are free to make decisions regarding the implementation or to take things out of scope, as long as your decision can be justified.
-4. Provide a README.md explaining your approach, which includes the image caching but also the rating view implementation and any other important decision or assumptions you made during development. Also, list all the 3rd party libraries used and the reason why.
-5. You should follow the layouts provided to develop the functionalities.
-6. The code of the assignment has to be delivered along with the git repository (.git folder). We want to see your progress. We require a cloud-hosted repository on Gitlab, which *MUST* be PRIVATE.
-7. **Do not open PRs to the main repository.**
-8. You are free to handle extra requirements, and this will be part of how we evaluate your work.
-7. The application should be developed in portrait mode only.
-9. Minimum Supported versions:
-	* Android - 5.0 +
-	* iOS - 14.0 +
-10. Do not use any hybrid solutions, such as Reactive Native or Flutter.
+### Liberaries
+- **Jetpack**
+  * **Viewmodel** - Manage UI related data in a lifecycle conscious way and act as a channel between use cases and UI.
+  * **Data Binding** - support library that allows binding of UI components in layouts to data sources, binds character details and search results to UI.
+  * **LiveData** - Provides an observable data holder class.
+  * **Navigation** - navigates between fragments
+- **Retrofit** - type safe http client and supports coroutines out of the box.
+- **Moshi** - JSON Parser, used to parse requests on the data layer for Entities and understands Kotlin non-nullable and default parameters.
+- **okhttp-logging-interceptor** - logs HTTP request and response data.
+- **kotlinx.coroutines** - Library Support for coroutines. I used this for asynchronous programming in order to obtain data from the network as well as the database.
+- **materialDesign** - Use some stuff from material design like Chips
+- **glide** - display and cache loaded images
+- **paginator** - add pagination to recyclerview
+- **Hilt** - Dependency injection plays a central role in the architectural pattern used. For this reason I have chosen Hilt which is built on top of the battle tested DI framework - Dagger 2.
+- **JUnit** - This was used for unit testing the repository, the use cases and the ViewModels.
+- **Mockk** This is a mocking library for Kotlin. I used it to provide test doubles during testing.
+- **Truth** - Assertions Library, provides readability as far as assertions are concerned.
+- **Robolectric** - Unit test on android framework.
+- **detek** - static analysis tool.

@@ -21,6 +21,18 @@ class MovieDetailsRepository @Inject constructor(
     /**
      *  fetch movie details data and emit success and failure response
      */
-    override suspend fun movieDetails(id: Int): Flow<Either<Failure, List<MovieDetails>>> = flow {
+    override suspend fun movieDetails(id: Int): Flow<Either<Failure, MovieDetails>> = flow {
+        val response =
+            apiService.getMovieDetails(id = id)
+        emit(
+            when (response.isSuccessful) {
+                true -> {
+                    response.body()?.let { it ->
+                        Either.Right(it.toDomainObject())
+                    } ?: Either.Left(Failure.DataError)
+                }
+                false -> Either.Left(Failure.ServerError)
+            }
+        )
     }
 }

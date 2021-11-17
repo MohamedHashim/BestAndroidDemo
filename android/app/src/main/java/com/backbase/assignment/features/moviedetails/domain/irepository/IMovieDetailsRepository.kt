@@ -10,5 +10,5 @@ import kotlinx.coroutines.flow.Flow
  */
 
 interface IMovieDetailsRepository {
-    suspend fun movieDetails(id: Int): Flow<Either<Failure, List<MovieDetails>>>
+    suspend fun movieDetails(id: Int): Flow<Either<Failure, MovieDetails>>
 }

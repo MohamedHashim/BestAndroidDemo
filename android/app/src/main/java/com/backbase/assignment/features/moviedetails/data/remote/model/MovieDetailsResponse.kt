@@ -11,8 +11,9 @@ data class MovieDetailsResponse(
     val runtime: Int,
     val title: String,
     val overview: String,
-    val release_date: String
+    val release_date: String,
+    val genres: List<Genre>
 ) {
     fun toDomainObject() =
-        MovieDetails(belongs_to_collection, runtime, title, overview, release_date)
+        MovieDetails(belongs_to_collection, runtime, title, overview, release_date, genres)
 }

@@ -3,6 +3,7 @@ package com.backbase.assignment.features.moviedetails.domain.usescases
 import com.backbase.assignment.UnitTest
 import com.backbase.assignment.core.functional.Either
 import com.backbase.assignment.features.moviedetails.data.remote.model.BelongsToCollectionResponse
+import com.backbase.assignment.features.moviedetails.data.remote.model.Genre
 import com.backbase.assignment.features.moviedetails.domain.irepository.IMovieDetailsRepository
 import com.backbase.assignment.features.moviedetails.domain.model.MovieDetails
 import com.backbase.assignment.features.moviedetails.domain.usecases.GetMovieDetailsUseCase
@@ -31,12 +32,20 @@ class MovieDetailsUseCaseTest : UnitTest() {
     private val mockedBelongsToCollection =
         BelongsToCollectionResponse("/srYya1ZlI97Au4jUYAktDe3avyA.jpg")
 
+    private val genresList = listOf(
+        Genre("Drama"),
+        Genre("Action"),
+        Genre("Adventure"),
+        Genre("Fantasy")
+    )
+
     private val mockedMovieDetails = MovieDetails(
         mockedBelongsToCollection,
         runtime = 123,
         title = "End Game",
         overview = "A botched store robbery places Wonder Woman in a global battle against a powerful and mysterious ancient force that puts her powers in jeopardy.",
-        release_date = "10-12-2020"
+        release_date = "10-12-2020",
+        genres = genresList
     )
 
     @Before

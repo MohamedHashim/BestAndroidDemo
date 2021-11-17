@@ -5,6 +5,7 @@ import com.backbase.assignment.core.exceptions.Failure
 import com.backbase.assignment.core.functional.Either
 import com.backbase.assignment.features.moviedetails.data.remote.api.MovieDetailsApi
 import com.backbase.assignment.features.moviedetails.data.remote.model.BelongsToCollectionResponse
+import com.backbase.assignment.features.moviedetails.data.remote.model.Genre
 import com.backbase.assignment.features.moviedetails.data.remote.model.MovieDetailsResponse
 import com.google.common.truth.Truth
 import io.mockk.coEvery
@@ -37,6 +38,13 @@ class MovieDetailsRepositoryTest : UnitTest() {
     private val mockedId = 464052
     private val mockedBelongsToCollection =
         BelongsToCollectionResponse("/srYya1ZlI97Au4jUYAktDe3avyA.jpg")
+
+    private val genresList = listOf(
+        Genre("Drama"),
+        Genre("Action"),
+        Genre("Adventure"),
+        Genre("Fantasy")
+    )
 
     @Before
     fun setUp() {
@@ -75,7 +83,7 @@ class MovieDetailsRepositoryTest : UnitTest() {
             title = "End Game",
             overview = "A botched store robbery places Wonder Woman in a global battle against a powerful and mysterious ancient force that puts her powers in jeopardy.",
             release_date = "10-12-2020",
-
+            genres = genresList
         )
         every { moviesResponse.body() } returns movieDetailsResponse
         every { moviesResponse.isSuccessful } returns true

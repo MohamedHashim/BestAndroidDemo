@@ -1,4 +1,4 @@
-package com.backbase.assignment.features.movies.presentation.ui
+package com.backbase.assignment.core.ui
 
 import android.widget.ImageView
 import androidx.core.content.ContextCompat

@@ -59,7 +59,7 @@
             app:layout_constraintTop_toBottomOf="@+id/title"
             tools:text="April 12, 2019" />
 
-        <com.backbase.assignment.features.movies.presentation.ui.custom.RatingView
+        <com.backbase.assignment.core.ui.custom.RatingView
             android:id="@+id/rating"
             android:layout_width="45dp"
             android:layout_height="45dp"

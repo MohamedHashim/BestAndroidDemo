@@ -1,4 +1,4 @@
-package com.backbase.assignment.features.movies.presentation.ui.custom
+package com.backbase.assignment.core.ui.custom
 
 import android.animation.PropertyValuesHolder
 import android.animation.ValueAnimator

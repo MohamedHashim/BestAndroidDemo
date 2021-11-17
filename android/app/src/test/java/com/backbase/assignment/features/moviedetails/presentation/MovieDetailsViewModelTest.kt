@@ -7,7 +7,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.backbase.assignment.UnitTest
 import com.backbase.assignment.core.exceptions.Failure
 import com.backbase.assignment.core.functional.Either
-import com.backbase.assignment.features.moviedetails.data.remote.model.BelongsToCollectionResponse
 import com.backbase.assignment.features.moviedetails.data.remote.model.Genre
 import com.backbase.assignment.features.moviedetails.domain.model.MovieDetails
 import com.backbase.assignment.features.moviedetails.domain.usecases.GetMovieDetailsUseCase
@@ -41,8 +40,7 @@ class MovieDetailsViewModelTest : UnitTest() {
     private lateinit var movieDetailsViewModel: MovieDetailsViewModel
 
     private val id = 1223
-    private val belongsToCollectionResponse =
-        BelongsToCollectionResponse(poster_path = "/d5NXSklXo0qyIYkgV94XAgMIckC.jpg")
+    private val belongsToCollectionResponse = "/d5NXSklXo0qyIYkgV94XAgMIckC.jpg"
 
     private val genresList = listOf(
         Genre("Drama"),
@@ -83,7 +81,7 @@ class MovieDetailsViewModelTest : UnitTest() {
         Truth.assertThat(res.errorMessage).isNull()
         Truth.assertThat(res.isLoading).isFalse()
         Truth.assertThat(res.movie?.poster_path)
-            .isEqualTo(movieDetails.belongs_to_collection.poster_path)
+            .isEqualTo(movieDetails.poster_path)
         Truth.assertThat(res.movie?.genres).isEqualTo(movieDetails.genres)
         Truth.assertThat(res.movie?.title).isEqualTo(movieDetails.title)
         Truth.assertThat(res.movie?.runtime).isEqualTo(movieDetails.runtime)

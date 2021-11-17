@@ -1,6 +1,7 @@
 package com.backbase.assignment.features.movies.presentation.viewmodel
 
 import android.app.Application
+import android.os.Bundle
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -151,5 +152,17 @@ class MoviesViewModel @Inject constructor(
     override fun onCleared() {
         job.cancel()
         super.onCleared()
+    }
+
+    /**
+     * companion object to send data bundle
+     */
+    companion object {
+        private const val movieIKey = "movieId"
+        fun createArguments(movieId: Int): Bundle {
+            val bundle = Bundle()
+            bundle.putInt(movieIKey, movieId)
+            return bundle
+        }
     }
 }

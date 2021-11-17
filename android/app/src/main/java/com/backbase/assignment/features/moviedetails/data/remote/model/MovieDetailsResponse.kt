@@ -7,7 +7,7 @@ import com.backbase.assignment.features.moviedetails.domain.model.MovieDetails
  */
 
 data class MovieDetailsResponse(
-    val belongs_to_collection: BelongsToCollectionResponse,
+    val poster_path: String,
     val runtime: Int,
     val title: String,
     val overview: String,
@@ -15,5 +15,5 @@ data class MovieDetailsResponse(
     val genres: List<Genre>
 ) {
     fun toDomainObject() =
-        MovieDetails(belongs_to_collection, runtime, title, overview, release_date, genres)
+        MovieDetails(poster_path, runtime, title, overview, release_date, genres)
 }

@@ -3,8 +3,7 @@ package com.backbase.assignment.core.di
 import com.backbase.assignment.BuildConfig
 import com.backbase.assignment.core.data.EndPoint
 import com.backbase.assignment.core.data.RequestInterceptor
-import com.backbase.assignment.features.moviedetails.data.remote.api.MovieDetailsApi
-import com.backbase.assignment.features.movies.data.remote.api.MovieApi
+import com.backbase.assignment.core.data.remote.api.MovieApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -57,14 +56,5 @@ object NetworkModule {
     @Provides
     fun provideMovieService(retrofit: Retrofit): MovieApi {
         return retrofit.create(MovieApi::class.java)
-    }
-
-    /**
-     *  provide movie details service for repository
-     */
-    @Singleton
-    @Provides
-    fun provideMovieDetailsService(retrofit: Retrofit): MovieDetailsApi {
-        return retrofit.create(MovieDetailsApi::class.java)
     }
 }

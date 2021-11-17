@@ -1,8 +1,8 @@
 package com.backbase.assignment.features.movies.data.repository
 
+import com.backbase.assignment.core.data.remote.api.MovieApi
 import com.backbase.assignment.core.exceptions.Failure
 import com.backbase.assignment.core.functional.Either
-import com.backbase.assignment.features.movies.data.remote.api.MovieApi
 import com.backbase.assignment.features.movies.domain.irepository.IPopularMoviesRepository
 import com.backbase.assignment.features.movies.domain.model.Movie
 import kotlinx.coroutines.flow.Flow

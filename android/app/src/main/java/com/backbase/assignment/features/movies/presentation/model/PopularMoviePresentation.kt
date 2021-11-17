@@ -5,6 +5,7 @@ package com.backbase.assignment.features.movies.presentation.model
  */
 
 data class PopularMoviePresentation(
+    val id: Int,
     val title: String,
     val rating: Int,
     val releaseDate: String,

@@ -2,7 +2,6 @@ package com.backbase.assignment.features.moviedetails.domain.usescases
 
 import com.backbase.assignment.UnitTest
 import com.backbase.assignment.core.functional.Either
-import com.backbase.assignment.features.moviedetails.data.remote.model.BelongsToCollectionResponse
 import com.backbase.assignment.features.moviedetails.data.remote.model.Genre
 import com.backbase.assignment.features.moviedetails.domain.irepository.IMovieDetailsRepository
 import com.backbase.assignment.features.moviedetails.domain.model.MovieDetails
@@ -29,8 +28,7 @@ class MovieDetailsUseCaseTest : UnitTest() {
 
     private val mockedId = 1234
 
-    private val mockedBelongsToCollection =
-        BelongsToCollectionResponse("/srYya1ZlI97Au4jUYAktDe3avyA.jpg")
+    private val mockedBelongsToCollection = "/srYya1ZlI97Au4jUYAktDe3avyA.jpg"
 
     private val genresList = listOf(
         Genre("Drama"),

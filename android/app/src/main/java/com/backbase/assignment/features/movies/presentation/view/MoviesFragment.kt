@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.backbase.assignment.R
 import com.backbase.assignment.databinding.FragmentMoviesBinding
 import com.backbase.assignment.features.movies.presentation.adapter.MoviesAdapter
 import com.backbase.assignment.features.movies.presentation.adapter.MoviesViewHolder
@@ -30,6 +31,12 @@ class MoviesFragment : Fragment(), MoviesViewHolder.Delegate {
     private lateinit var nowPlayingMoviesAdapter: NowPlayingMoviesAdapter
     private val adapterMovieList = MoviesAdapter(this)
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        moviesViewModel.getNowPlayingMovies()
+        moviesViewModel.getPopularMovies()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,8 +46,6 @@ class MoviesFragment : Fragment(), MoviesViewHolder.Delegate {
         binding.moviesViewModel = moviesViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        moviesViewModel.getNowPlayingMovies()
-        moviesViewModel.getPopularMovies()
         return binding.root
     }
 
@@ -125,6 +130,9 @@ class MoviesFragment : Fragment(), MoviesViewHolder.Delegate {
     }
 
     override fun onItemClick(view: View, movie: PopularMoviePresentation) {
-        Toast.makeText(context, movie.title, Toast.LENGTH_LONG).show()
+        findNavController().navigate(
+            R.id.action_moviesFragment_to_movieDetailsFragment,
+            MoviesViewModel.createArguments(movie.id)
+        )
     }
 }

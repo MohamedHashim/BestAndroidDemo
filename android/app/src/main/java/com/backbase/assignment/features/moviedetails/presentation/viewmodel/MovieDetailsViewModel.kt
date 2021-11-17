@@ -34,9 +34,9 @@ class MovieDetailsViewModel @Inject constructor(
     /**
      * get movie details with success and error handling
      */
-    fun getMovieDetails(id: Int) {
+    fun getMovieDetails(movie_id: Int) {
         _movieDetailsView.value = MovieDetailsView(isLoading = true)
-        getMovieDetailsUseCase(job, params = id) {
+        getMovieDetailsUseCase(job, params = movie_id) {
             it.fold(::handleMovieDetailsFailure, ::handleMovieDetailsSuccess)
         }
     }

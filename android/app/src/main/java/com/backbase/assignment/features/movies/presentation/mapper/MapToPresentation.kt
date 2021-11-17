@@ -14,7 +14,7 @@ fun Movie.toPresentation() = NowPlayingMoviePresentation(
 )
 
 fun Movie.toPopularMoviePresentation() = PopularMoviePresentation(
-
+    id = id,
     title = title,
     rating = rating,
     releaseDate = releaseDate,

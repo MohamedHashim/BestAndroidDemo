@@ -8,7 +8,7 @@ import com.backbase.assignment.features.moviedetails.presentation.model.MovieDet
  */
 
 fun MovieDetails.toPresentation() = MovieDetailsPresentation(
-    poster_path = belongs_to_collection.poster_path,
+    poster_path = poster_path,
     runtime = runtime,
     title = title,
     overview = overview,

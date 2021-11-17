@@ -7,7 +7,7 @@ import com.backbase.assignment.features.movies.domain.model.Movie
  */
 
 data class MovieResponse(
-    val id: Long,
+    val id: Int,
     val title: String,
     val vote_average: Float,
     val release_date: String,

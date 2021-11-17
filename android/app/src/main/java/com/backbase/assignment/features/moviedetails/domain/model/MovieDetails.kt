@@ -1,6 +1,5 @@
 package com.backbase.assignment.features.moviedetails.domain.model
 
-import com.backbase.assignment.features.moviedetails.data.remote.model.BelongsToCollectionResponse
 import com.backbase.assignment.features.moviedetails.data.remote.model.Genre
 
 /**
@@ -8,7 +7,7 @@ import com.backbase.assignment.features.moviedetails.data.remote.model.Genre
  */
 
 data class MovieDetails(
-    val belongs_to_collection: BelongsToCollectionResponse,
+    val poster_path: String,
     val runtime: Int,
     val title: String,
     val overview: String,

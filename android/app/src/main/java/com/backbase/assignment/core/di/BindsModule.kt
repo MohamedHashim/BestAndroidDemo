@@ -1,5 +1,7 @@
 package com.backbase.assignment.core.di
 
+import com.backbase.assignment.features.moviedetails.data.repository.MovieDetailsRepository
+import com.backbase.assignment.features.moviedetails.domain.irepository.IMovieDetailsRepository
 import com.backbase.assignment.features.movies.data.repository.NowPlayingMoviesRepository
 import com.backbase.assignment.features.movies.data.repository.PopularMoviesRepository
 import com.backbase.assignment.features.movies.domain.irepository.INowPlayingMoviesRepository
@@ -31,4 +33,10 @@ abstract class BindsModule {
      */
     @Binds
     abstract fun bindPopularMoviesRepository(repo: PopularMoviesRepository): IPopularMoviesRepository
+
+    /**
+     *  bind MovieDetailsRepository to the domain layer
+     */
+    @Binds
+    abstract fun bindMovieDetailsRepository(repo: MovieDetailsRepository): IMovieDetailsRepository
 }

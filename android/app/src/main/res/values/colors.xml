@@ -11,4 +11,5 @@
     <color name="light_yellow">#d1d530</color>
     <color name="white">#FFFFFF</color>
     <color name="grey_title">#cdcdcd</color>
+    <color name="dark_grey_photo_border">#828282</color>
 </resources>

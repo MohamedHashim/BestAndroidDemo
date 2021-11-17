@@ -6,13 +6,22 @@
     <dimen name="nowMovieWidth">106dp</dimen>
     <dimen name="nowMovieHeight">160dp</dimen>
 
+    <dimen name="movieWidth">135dp</dimen>
+    <dimen name="movieHeight">201dp</dimen>
+
     <dimen name="padding_4">4dp</dimen>
     <dimen name="padding_6">6dp</dimen>
+    <dimen name="padding_15">15dp</dimen>
     <dimen name="margin_17">17dp</dimen>
+    <dimen name="margin_18">18dp</dimen>
+    <dimen name="margin_20">20dp</dimen>
     <dimen name="padding_21">21dp</dimen>
     <dimen name="margin_29">29dp</dimen>
+    <dimen name="margin_33">33dp</dimen>
+    <dimen name="margin_71">71dp</dimen>
 
     <dimen name="header_text_size">12sp</dimen>
     <dimen name="title_text_size">14sp</dimen>
+    <dimen name="details_title_text_size">16sp</dimen>
     <dimen name="error_text_size">18sp</dimen>
 </resources>

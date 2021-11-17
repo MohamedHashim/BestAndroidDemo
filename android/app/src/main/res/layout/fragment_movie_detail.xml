@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <import type="android.view.View" />
+
+        <variable
+            name="view"
+            type="com.backbase.assignment.features.moviedetails.presentation.view.MovieDetailsFragment" />
+
+        <variable
+            name="movie"
+            type="com.backbase.assignment.features.moviedetails.presentation.model.MovieDetailsPresentation" />
 
     </data>
 
@@ -11,5 +21,99 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageButton
+            android:id="@+id/ib_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_15"
+            android:layout_marginTop="@dimen/margin_29"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/back_button"
+            android:onClick="@{() -> view.clickBackBtn()}"
+            android:padding="@dimen/padding_6"
+            android:src="@drawable/ic_back"
+            android:tint="@color/grey_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/poster"
+            bindingPosterUrl="@{movie.poster_path}"
+            android:layout_width="@dimen/movieWidth"
+            android:layout_height="@dimen/movieHeight"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="@dimen/margin_71"
+            android:layout_marginBottom="16dp"
+            android:background="@color/dark_grey_photo_border"
+            android:contentDescription="@string/movie_poster"
+            android:padding="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_18"
+            android:layout_marginTop="@dimen/padding_6"
+            android:layout_marginEnd="@dimen/margin_18"
+            android:ellipsize="middle"
+            android:gravity="center"
+            android:maxLines="2"
+            android:singleLine="false"
+            android:text="@{movie.title}"
+            android:textAppearance="@style/DetailsTitleTextAppearance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/poster"
+            app:layout_goneMarginEnd="@dimen/margin_18"
+            tools:text="No Time To Die dfsdg dfsg" />
+
+        <TextView
+            android:id="@+id/releaseDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{movie.release_date}"
+            android:textAppearance="@style/DetailsDescriptionTextAppearance"
+            app:layout_constraintEnd_toEndOf="@+id/title"
+            app:layout_constraintStart_toStartOf="@+id/title"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            tools:text="April 12, 2019" />
+
+        <TextView
+            android:id="@+id/overview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_33"
+            android:layout_marginTop="@dimen/margin_20"
+            android:text="@string/overview"
+            android:textAppearance="@style/DetailsTitleTextAppearance"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/releaseDate"
+            tools:text="@string/overview" />
+
+        <TextView
+            android:id="@+id/overview_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_15"
+            android:layout_marginEnd="@dimen/margin_33"
+            android:text="@{movie.overview}"
+            android:textAppearance="@style/DetailsDescriptionTextAppearance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/overview"
+            app:layout_constraintTop_toBottomOf="@+id/overview"
+            tools:text="On a post-apocalyptic Earth, a robot, built to protect the life of his dying creator's beloved dog, learns about life, love, friendship, and what it means to be human." />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chips_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20"
+            app:layout_constraintStart_toStartOf="@id/overview"
+            app:layout_constraintTop_toBottomOf="@id/overview_description" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

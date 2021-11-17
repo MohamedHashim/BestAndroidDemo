@@ -16,7 +16,7 @@
             app:destination="@id/movieDetailsFragment" />
     </fragment>
 
-    <fragment
+    <dialog
         android:id="@+id/movieDetailsFragment"
         android:name="com.backbase.assignment.features.moviedetails.presentation.view.MovieDetailsFragment"
         android:label="MovieDetailsFragment"

@@ -9,4 +9,6 @@
     <string name="most_popular">Most popular</string>
     <string name="movie_poster">movie poster</string>
     <string name="movie_key">movieId</string>
+    <string name="back_button">back button</string>
+    <string name="overview">Overview</string>
 </resources>

@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
         <item name="colorPrimary">@color/darkBackground</item>
         <item name="colorPrimaryDark">@color/darkBackground</item>
     </style>
@@ -27,10 +27,23 @@
         <item name="android:fontFamily">@font/helveticaneubold</item>
     </style>
 
-    <style name="DateTextAppearance" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/grey_title</item>
-        <item name="android:textAllCaps">false</item>
+    <style name="DateTextAppearance" parent="@style/TitleTextAppearance">
         <item name="android:textSize">@dimen/header_text_size</item>
         <item name="android:fontFamily">@font/helveticaneuelt</item>
     </style>
+
+    <style name="DetailsTitleTextAppearance" parent="@style/TitleTextAppearance">
+        <item name="android:textSize">@dimen/details_title_text_size</item>
+    </style>
+
+    <style name="DetailsDescriptionTextAppearance" parent="@style/DateTextAppearance">
+        <item name="android:textSize">@dimen/title_text_size</item>
+    </style>
+
+    <style name="ChipTextAppearance" parent="@style/DateTextAppearance">
+        <item name="android:textSize">@dimen/title_text_size</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/darkBackground</item>
+    </style>
+
 </resources>

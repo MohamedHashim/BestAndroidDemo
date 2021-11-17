@@ -1,7 +1,7 @@
 # Mobile Assignment CS
 I have built this application in clean architecture and MVVM presentation archticture. It's well tested and documented for all layers data, domain, and presentation.
 
-How to build on your environment
+How to build it on your environment?
 --------------
 For secutity wise, I have hidden my API key from the project and added it in local.properties<br />
 In order to build the project properly in your machince, you have to add your [The Movie DB](https://www.themoviedb.org)'s API key in your `local.properties` file.
@@ -10,7 +10,7 @@ API_KEY="YOUR_API_KEY"
 ```
 
 ## App architecture
-![alt text](https://gitlab.com/MohamedHashim/cs-mobile-assignment/-/blob/84b9d1648c742f33d843ea85ed46755896c9ca7e/android/app_architecture.png "App Architecture")
+![alt text](android/app_architecture.png "App Architecture")
 
 ## Decisions
 - Used TDD approach while implementing the project

@@ -106,4 +106,12 @@ class MovieDetailsFragment : DialogFragment() {
     fun clickBackBtn() {
         findNavController().navigateUp()
     }
+
+    /**
+     * clear binding to avoid memory leaks
+     */
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

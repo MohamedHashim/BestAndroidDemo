@@ -69,7 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_17"
             android:layout_marginEnd="6dp"
-            android:padding="50dp"
+            android:layout_margin="50dp"
             android:paddingStart="@dimen/padding_21"
             android:text="@{moviesViewModel.nowPlayingMoviesView.errorMessage}"
             android:textAppearance="@style/ErrorTextAppearance"
@@ -119,9 +119,10 @@
             android:text="@{moviesViewModel.popularMoviesView.errorMessage}"
             android:textAppearance="@style/ErrorTextAppearance"
             android:visibility="@{moviesViewModel.popularMoviesView.errorMessage!=null ? View.VISIBLE : View.GONE, default=gone}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:padding="@dimen/padding_6"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_popular_header"
             tools:ignore="RtlSymmetry" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

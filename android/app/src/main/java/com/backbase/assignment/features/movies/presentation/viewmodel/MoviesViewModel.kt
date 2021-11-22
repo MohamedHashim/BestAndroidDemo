@@ -45,6 +45,7 @@ class MoviesViewModel @Inject constructor(
         get() = _page
 
     init {
+        getNowPlayingMovies()
         popularMoviesView = page.switchMap {
             _popularMoviesView.apply { getPopularMovies(it) }
         }

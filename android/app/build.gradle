@@ -88,6 +88,10 @@ dependencies {
     //livedata
     implementation Libraries.livedata
 
+    //leakcanary to detect memory leaks
+    debugImplementation Libraries.leakcanary
+
+
     //testing
     testImplementation TestLibraries.testCore
     testImplementation TestLibraries.archCore

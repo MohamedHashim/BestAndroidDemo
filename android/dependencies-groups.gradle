@@ -27,7 +27,8 @@ ext {
             navigationUi      : "androidx.navigation:navigation-ui-ktx:$LibrariesVersion.navigation",
             glide             : "com.github.bumptech.glide:glide:$LibrariesVersion.glide",
             rvPaging          : "com.github.skydoves:baserecyclerviewadapter:$LibrariesVersion.paging",
-            livedata          : "androidx.lifecycle:lifecycle-livedata-ktx:$LibrariesVersion.livedata"
+            livedata          : "androidx.lifecycle:lifecycle-livedata-ktx:$LibrariesVersion.livedata",
+            leakcanary        : "com.squareup.leakcanary:leakcanary-android:$LibrariesVersion.leakcanary"
     ]
 
     TestLibraries = [

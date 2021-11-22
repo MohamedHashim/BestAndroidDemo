@@ -35,7 +35,6 @@ class MoviesFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        moviesViewModel.getNowPlayingMovies()
         loadMorePopularMovies(1)
     }
 

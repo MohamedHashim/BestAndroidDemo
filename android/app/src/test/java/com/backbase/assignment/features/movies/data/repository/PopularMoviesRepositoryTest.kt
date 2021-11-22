@@ -84,7 +84,7 @@ class PopularMoviesRepositoryTest : UnitTest() {
 
         val movies = popularMoviesRepository.popularMovies(1)
         movies.collect { a ->
-            assertThat(a).isEqualTo(Either.Right(popularMovieResponse.results.map { it.toDomainObject() }))
+            assertThat(a).isEqualTo(Either.Right(popularMovieResponse.results.map { it.toDomainObject(10) }))
         }
     }
 }

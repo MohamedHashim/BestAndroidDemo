@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.backbase.assignment.R
 import com.backbase.assignment.databinding.FragmentMoviesBinding
 import com.backbase.assignment.features.movies.presentation.adapter.ClickListener
-import com.backbase.assignment.features.movies.presentation.adapter.PopularMoviesAdapter
 import com.backbase.assignment.features.movies.presentation.adapter.NowPlayingMoviesAdapter
+import com.backbase.assignment.features.movies.presentation.adapter.PopularMoviesAdapter
 import com.backbase.assignment.features.movies.presentation.model.NowPlayingMoviePresentation
 import com.backbase.assignment.features.movies.presentation.model.PopularMoviePresentation
 import com.backbase.assignment.features.movies.presentation.viewmodel.MoviesViewModel
@@ -31,11 +31,12 @@ class MoviesFragment :
     private val moviesViewModel: MoviesViewModel by viewModels()
     private lateinit var nowPlayingMoviesAdapter: NowPlayingMoviesAdapter
     private val adapterMovieList = PopularMoviesAdapter(this)
+    private var totalPages = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         moviesViewModel.getNowPlayingMovies()
-        moviesViewModel.getPopularMovies()
+        loadMorePopularMovies(1)
     }
 
     override fun onCreateView(
@@ -46,6 +47,9 @@ class MoviesFragment :
         _binding = FragmentMoviesBinding.inflate(inflater, container, false)
         binding.moviesViewModel = moviesViewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        val linearLayoutManager = LinearLayoutManager(this.context)
+        linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
+        binding.rvPopularMovies.layoutManager = linearLayoutManager
 
         return binding.root
     }
@@ -90,6 +94,7 @@ class MoviesFragment :
             viewLifecycleOwner,
             { popularMoviesView ->
                 if (popularMoviesView.movies != null) {
+                    totalPages = popularMoviesView.movies.first().total_pages
                     setupPopularMoviesAdapter(popularMoviesView.movies)
                 }
             }
@@ -100,10 +105,9 @@ class MoviesFragment :
      * Initialize popular movies adapter
      */
     private fun setupPopularMoviesAdapter(movies: List<PopularMoviePresentation>?) {
+        val recyclerViewState = binding.rvPopularMovies.layoutManager?.onSaveInstanceState()
         adapterMovieList.addMovieList(movies!!)
-        val linearLayoutManager = LinearLayoutManager(this.context)
-        linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
-        binding.rvPopularMovies.layoutManager = linearLayoutManager
+        binding.rvPopularMovies.layoutManager?.onRestoreInstanceState(recyclerViewState)
         binding.rvPopularMovies.adapter = adapterMovieList
     }
 
@@ -114,12 +118,18 @@ class MoviesFragment :
         RecyclerViewPaginator(
             recyclerView = binding.rvPopularMovies,
             isLoading = { false },
-            loadMore = { moviesViewModel.getPopularMovies(it) },
+            loadMore = { if (it <= totalPages) loadMorePopularMovies(it) },
             onLast = { false }
         ).apply {
-            threshold = 5
             currentPage = 1
         }
+    }
+
+    /**
+     * load more pages for popular movies
+     */
+    private fun loadMorePopularMovies(page: Int) {
+        moviesViewModel.postPage(page)
     }
 
     /**

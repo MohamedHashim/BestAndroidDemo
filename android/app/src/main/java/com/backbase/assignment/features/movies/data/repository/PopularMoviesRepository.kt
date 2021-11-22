@@ -30,7 +30,7 @@ class PopularMoviesRepository @Inject constructor(
                 when (response.isSuccessful) {
                     true -> {
                         response.body()?.let { it ->
-                            Either.Right(it.results.map { a -> a.toDomainObject() })
+                            Either.Right(it.results.map { a -> a.toDomainObject(it.total_pages) })
                         } ?: Either.Left(Failure.DataError)
                     }
                     false -> Either.Left(Failure.ServerError)

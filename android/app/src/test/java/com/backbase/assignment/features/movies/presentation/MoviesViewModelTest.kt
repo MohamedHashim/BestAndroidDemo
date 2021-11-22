@@ -55,7 +55,7 @@ class MoviesViewModelTest : UnitTest() {
                 "End Game",
                 56,
                 "29-12-2021",
-                "/d5NXSklXo0qyIYkgV94XAgMIckC.jpg"
+                "/d5NXSklXo0qyIYkgV94XAgMIckC.jpg", 500
             )
         )
         moviesViewModel =
@@ -134,7 +134,7 @@ class MoviesViewModelTest : UnitTest() {
         every { getPopularMoviesUseCase(any(), onResult = any(), params = any()) }.answers {
             thirdArg<(Either<Failure, List<Movie>>) -> Unit>()(Either.Right(movies))
         }
-        moviesViewModel.getPopularMovies(page)
+        moviesViewModel.postPage(page)
 
         val res = moviesViewModel.popularMoviesView.getOrAwaitValueTest()
         assertThat(res.errorMessage).isNull()
@@ -148,7 +148,7 @@ class MoviesViewModelTest : UnitTest() {
         every { getPopularMoviesUseCase(any(), onResult = any(), params = any()) }.answers {
             thirdArg<(Either<Failure, List<Movie>>) -> Unit>()(Either.Right(emptyList()))
         }
-        moviesViewModel.getPopularMovies(page)
+        moviesViewModel.postPage(page)
 
         val res = moviesViewModel.popularMoviesView.getOrAwaitValueTest()
         assertThat(res.errorMessage).isNotNull()
@@ -163,7 +163,7 @@ class MoviesViewModelTest : UnitTest() {
         every { getPopularMoviesUseCase(any(), onResult = any(), params = any()) }.answers {
             thirdArg<(Either<Failure, List<Movie>>) -> Unit>()(Either.Left(Failure.ServerError))
         }
-        moviesViewModel.getPopularMovies(page)
+        moviesViewModel.postPage(page)
 
         val res = moviesViewModel.popularMoviesView.getOrAwaitValueTest()
         assertThat(res.errorMessage).isNotNull()
@@ -178,7 +178,7 @@ class MoviesViewModelTest : UnitTest() {
         every { getPopularMoviesUseCase(any(), onResult = any(), params = any()) }.answers {
             thirdArg<(Either<Failure, List<Movie>>) -> Unit>()(Either.Left(Failure.DataError))
         }
-        moviesViewModel.getPopularMovies(page)
+        moviesViewModel.postPage(page)
 
         val res = moviesViewModel.popularMoviesView.getOrAwaitValueTest()
         assertThat(res.errorMessage).isNotNull()

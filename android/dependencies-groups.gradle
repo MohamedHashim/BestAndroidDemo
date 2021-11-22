@@ -26,7 +26,8 @@ ext {
             navigationFragment: "androidx.navigation:navigation-fragment-ktx:$LibrariesVersion.navigation",
             navigationUi      : "androidx.navigation:navigation-ui-ktx:$LibrariesVersion.navigation",
             glide             : "com.github.bumptech.glide:glide:$LibrariesVersion.glide",
-            rvPaging            : "com.github.skydoves:baserecyclerviewadapter:$LibrariesVersion.paging"
+            rvPaging          : "com.github.skydoves:baserecyclerviewadapter:$LibrariesVersion.paging",
+            livedata          : "androidx.lifecycle:lifecycle-livedata-ktx:$LibrariesVersion.livedata"
     ]
 
     TestLibraries = [

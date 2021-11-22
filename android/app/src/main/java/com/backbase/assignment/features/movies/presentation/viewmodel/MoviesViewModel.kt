@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.switchMap
 import com.backbase.assignment.R
 import com.backbase.assignment.core.exceptions.Failure
 import com.backbase.assignment.features.movies.domain.model.Movie
@@ -38,7 +39,16 @@ class MoviesViewModel @Inject constructor(
 
     private val _popularMoviesView = MutableLiveData<PopularMovieView>()
     val popularMoviesView: LiveData<PopularMovieView>
-        get() = _popularMoviesView
+
+    private val _page = MutableLiveData<Int>()
+    private val page: LiveData<Int>
+        get() = _page
+
+    init {
+        popularMoviesView = page.switchMap {
+            _popularMoviesView.apply { getPopularMovies(it) }
+        }
+    }
 
     /**
      * get now playing movies with success and error handling
@@ -91,6 +101,13 @@ class MoviesViewModel @Inject constructor(
                     )
             }
         }
+    }
+
+    /**
+     * post new page value for popular movies
+     */
+    fun postPage(page: Int) {
+        this._page.value = page
     }
 
     /**

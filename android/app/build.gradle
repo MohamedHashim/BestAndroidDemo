@@ -85,6 +85,9 @@ dependencies {
     // recylerview paging
     implementation Libraries.rvPaging
 
+    //livedata
+    implementation Libraries.livedata
+
     //testing
     testImplementation TestLibraries.testCore
     testImplementation TestLibraries.archCore

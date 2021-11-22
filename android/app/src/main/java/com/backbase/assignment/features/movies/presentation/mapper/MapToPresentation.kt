@@ -18,5 +18,6 @@ fun Movie.toPopularMoviePresentation() = PopularMoviePresentation(
     title = title,
     rating = rating,
     releaseDate = releaseDate,
-    posterPath = posterPath
+    posterPath = posterPath,
+    total_pages = total_pages
 )
